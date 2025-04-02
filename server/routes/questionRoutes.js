@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Question = require('../models/Question');
 const Course = require('../models/Course');
 const { authenticate, authorizeAdmin } = require('../middleware/auth');
+const mongoose = require('mongoose');
 
 // Get all questions for a course (admin only)
 router.get('/course/:courseId', authenticate, authorizeAdmin, async (req, res) => {

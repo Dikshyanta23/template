@@ -4,6 +4,9 @@ const Course = require('../models/Course');
 const Question = require('../models/Question');
 const User = require('../models/User');
 const { authenticate, authorizeAdmin } = require('../middleware/auth');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
+
 
 // Get all courses
 router.get('/', async (req, res) => {
@@ -142,7 +145,7 @@ router.get('/:id/test', async (req, res) => {
     const count = parseInt(req.query.count) || 10;
     
     const questions = await Question.aggregate([
-      { $match: { course: mongoose.Types.ObjectId(req.params.id) } },
+      { $match: { course: new ObjectId(req.params.id) } },
       { $sample: { size: count } }
     ]);
     

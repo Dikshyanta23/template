@@ -118,22 +118,22 @@ const physicsALevelQuestions = [
       {
         "text": "kg m/s²",
         "explanation": "kg m/s² is the unit for force (Newton), not momentum.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "kg m/s",
         "explanation": "Momentum is mass × velocity, so its unit is kg m/s.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "kg m²/s",
         "explanation": "kg m²/s is the unit for angular momentum, not linear momentum.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "J s",
         "explanation": "J s (joule-second) is the unit for Planck's constant, not momentum.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -143,22 +143,22 @@ const physicsALevelQuestions = [
       {
         "text": "λ = f/v",
         "explanation": "This is incorrect. The correct relationship is λ = v/f, where v is the wave speed.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "λ = v × f",
         "explanation": "This is incorrect. The correct relationship is λ = v/f, where v is the wave speed.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "λ = v/f",
         "explanation": "Correct! The wavelength equals the wave speed divided by the frequency.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "λ = f × t",
         "explanation": "This is incorrect. The relationship between wavelength and frequency is λ = v/f.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -168,22 +168,22 @@ const physicsALevelQuestions = [
       {
         "text": "Gravitational potential energy increases as height decreases",
         "explanation": "This is incorrect. Gravitational potential energy increases with height.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Gravitational potential energy is always positive",
         "explanation": "This is incorrect. Gravitational potential energy can be negative, zero, or positive depending on the reference point.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Gravitational potential energy increases as height increases",
         "explanation": "Correct! Gravitational potential energy increases with height according to mgh.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "Gravitational potential energy is independent of mass",
         "explanation": "This is incorrect. Gravitational potential energy is directly proportional to mass.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -193,22 +193,22 @@ const physicsALevelQuestions = [
       {
         "text": "N/C",
         "explanation": "Correct! Electric field strength is force per unit charge, so its unit is newtons per coulomb (N/C).",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "V/m",
         "explanation": "This is also correct, but N/C is the more fundamental unit. V/m is equivalent to N/C.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "N·m/C",
         "explanation": "This is incorrect. N·m/C is the unit for electric potential (voltage), not electric field strength.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "C/m²",
         "explanation": "This is incorrect. C/m² is the unit for electric flux density, not electric field strength.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -218,22 +218,22 @@ const physicsALevelQuestions = [
       {
         "text": "Work",
         "explanation": "This is incorrect. Work is a scalar quantity, not a vector.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Energy",
         "explanation": "This is incorrect. Energy is a scalar quantity, not a vector.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Acceleration",
         "explanation": "Correct! Acceleration has both magnitude and direction, making it a vector quantity.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "Temperature",
         "explanation": "This is incorrect. Temperature is a scalar quantity, not a vector.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -243,22 +243,22 @@ const physicsALevelQuestions = [
       {
         "text": "E = V × d",
         "explanation": "This is incorrect. The relationship is E = -dV/dx, or V = -∫E·dl.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = V/d",
         "explanation": "This is correct for a uniform field between parallel plates, where d is the distance between the plates.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "E = V²",
         "explanation": "This is incorrect. The relationship is E = -dV/dx, or V = -∫E·dl.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = √V",
         "explanation": "This is incorrect. The relationship is E = -dV/dx, or V = -∫E·dl.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -268,22 +268,22 @@ const physicsALevelQuestions = [
       {
         "text": "Electrons are emitted when light of any frequency hits a metal surface",
         "explanation": "This is incorrect. Electrons are only emitted when the frequency of light is above the threshold frequency.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The kinetic energy of emitted electrons depends only on the intensity of light",
         "explanation": "This is incorrect. The kinetic energy of emitted electrons depends on the frequency of light, not its intensity.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The number of electrons emitted depends on the frequency of light",
         "explanation": "This is incorrect. The number of electrons emitted depends on the intensity of light, not its frequency.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Electrons are emitted only when light above a threshold frequency hits a metal surface",
         "explanation": "Correct! This describes the photoelectric effect, where electrons are only emitted when the photon energy (related to frequency) exceeds the work function.",
-        "isCorrect": True
+        "isCorrect": true
       }
     ]
   },
@@ -293,22 +293,22 @@ const physicsALevelQuestions = [
       {
         "text": "λ = h/p",
         "explanation": "Correct! The de Broglie wavelength equals Planck's constant divided by momentum.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "λ = h×p",
         "explanation": "This is incorrect. The de Broglie wavelength is h/p, not h×p.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "λ = p/h",
         "explanation": "This is incorrect. The de Broglie wavelength is h/p, not p/h.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "λ = h/E",
         "explanation": "This is incorrect. The de Broglie wavelength is h/p, not h/E.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -318,22 +318,22 @@ const physicsALevelQuestions = [
       {
         "text": "The acceleration is directly proportional to displacement",
         "explanation": "This is incorrect. In SHM, acceleration is directly proportional to displacement but in the opposite direction.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The acceleration is directly proportional to displacement and in the opposite direction",
         "explanation": "Correct! In SHM, a = -ω²x, where acceleration is proportional to displacement but in the opposite direction.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The velocity is directly proportional to displacement",
         "explanation": "This is incorrect. In SHM, velocity is not directly proportional to displacement.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The period depends on the amplitude",
         "explanation": "This is incorrect. In SHM, the period is independent of amplitude.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -343,22 +343,22 @@ const physicsALevelQuestions = [
       {
         "text": "P = f",
         "explanation": "This is incorrect. The power of a lens is the reciprocal of its focal length in meters.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P = 1/f",
         "explanation": "Correct! The power of a lens in diopters equals 1 divided by the focal length in meters.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "P = f²",
         "explanation": "This is incorrect. The power of a lens is the reciprocal of its focal length in meters.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P = √f",
         "explanation": "This is incorrect. The power of a lens is the reciprocal of its focal length in meters.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -368,22 +368,22 @@ const physicsALevelQuestions = [
       {
         "text": "F = qvB",
         "explanation": "This is incomplete. The magnetic force depends on the angle between velocity and magnetic field.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = qvB sin θ",
         "explanation": "Correct! The magnetic force is F = qvB sin θ, where θ is the angle between velocity and magnetic field.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "F = qvB cos θ",
         "explanation": "This is incorrect. The magnetic force is F = qvB sin θ, not qvB cos θ.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = qB/v",
         "explanation": "This is incorrect. The magnetic force is directly proportional to velocity, not inversely proportional.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -393,22 +393,22 @@ const physicsALevelQuestions = [
       {
         "text": "When two waves meet, they always cancel each other out",
         "explanation": "This is incorrect. Waves can either constructively or destructively interfere, not always cancel out.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "When two waves meet, they always reinforce each other",
         "explanation": "This is incorrect. Waves can either constructively or destructively interfere, not always reinforce.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "When two waves meet, the resultant displacement equals the sum of the individual displacements",
         "explanation": "Correct! The principle of superposition states that when waves overlap, the resultant displacement equals the vector sum of the individual displacements.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "When two waves meet, they pass through each other unchanged",
         "explanation": "This is partially correct but incomplete. Waves do pass through each other, but the principle of superposition describes what happens during the overlap.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -418,22 +418,22 @@ const physicsALevelQuestions = [
       {
         "text": "Nuclear fusion releases energy because the products have less mass than the reactants",
         "explanation": "Correct! In fusion, the mass defect is converted to energy according to E = mc².",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "Nuclear fusion releases energy because the products have more mass than the reactants",
         "explanation": "This is incorrect. In fusion, the products have less mass than the reactants, not more.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Nuclear fusion occurs spontaneously at room temperature",
         "explanation": "This is incorrect. Fusion requires extremely high temperatures to overcome the electrostatic repulsion between nuclei.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Nuclear fusion involves the splitting of heavy nuclei",
         "explanation": "This is incorrect. Fusion involves the combining of light nuclei, while fission involves the splitting of heavy nuclei.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -443,22 +443,22 @@ const physicsALevelQuestions = [
       {
         "text": "vrms ∝ T",
         "explanation": "This is incorrect. The rms speed is proportional to the square root of temperature.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "vrms ∝ √T",
         "explanation": "Correct! According to kinetic theory, vrms = √(3RT/M), so vrms is proportional to √T.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "vrms ∝ T²",
         "explanation": "This is incorrect. The rms speed is proportional to the square root of temperature.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "vrms ∝ 1/T",
         "explanation": "This is incorrect. The rms speed increases with temperature, not decreases.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -468,22 +468,22 @@ const physicsALevelQuestions = [
       {
         "text": "The induced emf is proportional to the rate of change of current",
         "explanation": "This is incomplete. The induced emf is proportional to the rate of change of magnetic flux, not just current.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The induced emf is proportional to the magnetic field strength",
         "explanation": "This is incomplete. The induced emf depends on the rate of change of magnetic flux, not just field strength.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The induced emf is proportional to the rate of change of magnetic flux",
         "explanation": "Correct! Faraday's law states that the induced emf is proportional to the rate of change of magnetic flux through a circuit.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The induced emf is proportional to the area of the loop",
         "explanation": "This is incomplete. The induced emf depends on the rate of change of magnetic flux, which includes area but is not solely dependent on it.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -493,22 +493,22 @@ const physicsALevelQuestions = [
       {
         "text": "En ∝ n",
         "explanation": "This is incorrect. The energy levels are proportional to 1/n².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "En ∝ n²",
         "explanation": "This is incorrect. The energy levels are proportional to 1/n².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "En ∝ 1/n",
         "explanation": "This is incorrect. The energy levels are proportional to 1/n².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "En ∝ 1/n²",
         "explanation": "Correct! The energy levels of a hydrogen atom are given by En = -13.6 eV/n², so En is proportional to 1/n².",
-        "isCorrect": True
+        "isCorrect": true
       }
     ]
   },
@@ -518,22 +518,22 @@ const physicsALevelQuestions = [
       {
         "text": "The equivalent capacitance is the sum of the individual capacitances",
         "explanation": "This is incorrect. For capacitors in series, the reciprocal of the equivalent capacitance equals the sum of the reciprocals of the individual capacitances.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The equivalent capacitance is always greater than any individual capacitance",
         "explanation": "This is incorrect. For capacitors in series, the equivalent capacitance is always less than the smallest individual capacitance.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The equivalent capacitance is always less than the smallest individual capacitance",
         "explanation": "Correct! For capacitors in series, the equivalent capacitance is always less than the smallest individual capacitance.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The charge is different on each capacitor",
         "explanation": "This is incorrect. For capacitors in series, the charge is the same on each capacitor.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -543,22 +543,22 @@ const physicsALevelQuestions = [
       {
         "text": "P ∝ V",
         "explanation": "This is incorrect. For an isothermal process, pressure is inversely proportional to volume.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P ∝ 1/V",
         "explanation": "Correct! For an isothermal process, PV = constant, so P ∝ 1/V (Boyle's Law).",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "P ∝ V²",
         "explanation": "This is incorrect. For an isothermal process, pressure is inversely proportional to volume.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P ∝ √V",
         "explanation": "This is incorrect. For an isothermal process, pressure is inversely proportional to volume.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -568,22 +568,22 @@ const physicsALevelQuestions = [
       {
         "text": "f' = f(v/(v±vs))",
         "explanation": "This is incorrect. The correct expression accounts for both source and observer motion.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "f' = f(v±vo)/(v±vs)",
         "explanation": "Correct! This is the general expression for the Doppler effect, where v is the speed of sound, vo is the observer velocity, and vs is the source velocity.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "f' = f(v±vs)/(v±vo)",
         "explanation": "This is incorrect. The correct expression has the observer term in the numerator and the source term in the denominator.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "f' = f(v±vo)",
         "explanation": "This is incorrect. The correct expression accounts for both source and observer motion.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -593,22 +593,22 @@ const physicsALevelQuestions = [
       {
         "text": "T1/2 = λ",
         "explanation": "This is incorrect. The half-life is related to the decay constant by T1/2 = ln(2)/λ.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "T1/2 = 1/λ",
         "explanation": "This is incorrect. The half-life is related to the decay constant by T1/2 = ln(2)/λ.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "T1/2 = ln(2)/λ",
         "explanation": "Correct! The half-life is related to the decay constant by T1/2 = ln(2)/λ or T1/2 = 0.693/λ.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "T1/2 = λ/ln(2)",
         "explanation": "This is incorrect. The half-life is related to the decay constant by T1/2 = ln(2)/λ.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -618,22 +618,22 @@ const physicsALevelQuestions = [
       {
         "text": "It is impossible to measure both position and momentum with perfect accuracy due to experimental limitations",
         "explanation": "This is incorrect. The uncertainty principle is a fundamental limit, not just an experimental limitation.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The product of the uncertainties in position and momentum must be greater than or equal to ħ/2",
         "explanation": "Correct! The uncertainty principle states that ΔxΔp ≥ ħ/2, where ħ is the reduced Planck constant.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "It applies only to subatomic particles",
         "explanation": "This is incorrect. The uncertainty principle applies to all wave-like systems, though its effects are most noticeable at the quantum scale.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "It states that energy and time can be measured with perfect accuracy simultaneously",
         "explanation": "This is incorrect. The uncertainty principle also applies to energy and time: ΔEΔt ≥ ħ/2.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -643,22 +643,22 @@ const physicsALevelQuestions = [
       {
         "text": "E = -dV/dx",
         "explanation": "Correct! The electric field is the negative gradient of the electric potential.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "E = dV/dx",
         "explanation": "This is incorrect. The electric field is the negative gradient of the electric potential.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = V/d",
         "explanation": "This is a special case for a uniform field between parallel plates, but the general relationship is E = -dV/dx.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = V × d",
         "explanation": "This is incorrect. The electric field is the negative gradient of the electric potential.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -668,22 +668,22 @@ const physicsALevelQuestions = [
       {
         "text": "F = mv²/r",
         "explanation": "Correct! The centripetal force is given by F = mv²/r, where m is mass, v is velocity, and r is radius.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "F = mr²/v",
         "explanation": "This is incorrect. The centripetal force is F = mv²/r.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = mv/r²",
         "explanation": "This is incorrect. The centripetal force is F = mv²/r.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = mrv",
         "explanation": "This is incorrect. The centripetal force is F = mv²/r.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -693,22 +693,22 @@ const physicsALevelQuestions = [
       {
         "text": "W = ΔK",
         "explanation": "Correct! The work-energy theorem states that the net work done on an object equals its change in kinetic energy.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "W = ΔK/2",
         "explanation": "This is incorrect. The work-energy theorem states that W = ΔK.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "W = 2ΔK",
         "explanation": "This is incorrect. The work-energy theorem states that W = ΔK.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "W = ΔK²",
         "explanation": "This is incorrect. The work-energy theorem states that W = ΔK.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -718,22 +718,22 @@ const physicsALevelQuestions = [
       {
         "text": "It is the amount of heat required to raise the temperature of 1 kg of the substance by 1°C",
         "explanation": "Correct! The specific heat capacity is the amount of heat energy required to raise the temperature of 1 kg of a substance by 1°C or 1 K.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "It is the amount of heat required to change the state of 1 kg of the substance",
         "explanation": "This is incorrect. This describes the specific latent heat, not the specific heat capacity.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "It is the amount of heat required to raise the temperature of the substance by 1°C",
         "explanation": "This is incorrect. The specific heat capacity refers to a specific mass (1 kg) of the substance.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "It is the amount of heat required to raise the temperature of 1 mol of the substance by 1°C",
         "explanation": "This is incorrect. This describes the molar heat capacity, not the specific heat capacity.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -743,22 +743,22 @@ const physicsALevelQuestions = [
       {
         "text": "B ∝ I²",
         "explanation": "This is incorrect. The magnetic field is directly proportional to the current.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "B ∝ I",
         "explanation": "Correct! The magnetic field inside a solenoid is directly proportional to the current: B = μ₀nI, where n is the number of turns per unit length.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "B ∝ √I",
         "explanation": "This is incorrect. The magnetic field is directly proportional to the current.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "B ∝ 1/I",
         "explanation": "This is incorrect. The magnetic field is directly proportional to the current, not inversely proportional.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -768,22 +768,22 @@ const physicsALevelQuestions = [
       {
         "text": "E = -13.6 eV × n²",
         "explanation": "This is incorrect. The energy is inversely proportional to n².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = -13.6 eV/n²",
         "explanation": "Correct! The energy levels of a hydrogen atom are given by E = -13.6 eV/n², where n is the principal quantum number.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "E = 13.6 eV/n²",
         "explanation": "This is incorrect. The energy is negative and equals -13.6 eV/n².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "E = -13.6 eV × n",
         "explanation": "This is incorrect. The energy is inversely proportional to n².",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -793,22 +793,22 @@ const physicsALevelQuestions = [
       {
         "text": "f = T",
         "explanation": "This is incorrect. Frequency and period are reciprocals of each other.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "f = 1/T",
         "explanation": "Correct! Frequency is the reciprocal of the period: f = 1/T.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "f = T²",
         "explanation": "This is incorrect. Frequency and period are reciprocals of each other.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "f = √T",
         "explanation": "This is incorrect. Frequency and period are reciprocals of each other.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -818,22 +818,22 @@ const physicsALevelQuestions = [
       {
         "text": "The intensity of light affects the energy of emitted electrons",
         "explanation": "This is incorrect. The energy of emitted electrons depends on frequency, not intensity, which supports the particle nature of light.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "There is a threshold frequency below which no electrons are emitted regardless of intensity",
         "explanation": "Correct! This observation supports the particle (photon) nature of light, as it suggests that light energy comes in discrete packets.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The number of emitted electrons is proportional to the frequency of light",
         "explanation": "This is incorrect. The number of emitted electrons is proportional to intensity, not frequency.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Electrons are emitted after a time delay when light hits the metal surface",
         "explanation": "This is incorrect. The immediate emission of electrons (no time delay) actually supports the particle nature of light.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -843,22 +843,22 @@ const physicsALevelQuestions = [
       {
         "text": "R ∝ L/A",
         "explanation": "Correct! The resistance is directly proportional to length and inversely proportional to cross-sectional area: R = ρL/A.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "R ∝ L×A",
         "explanation": "This is incorrect. The resistance is directly proportional to length and inversely proportional to cross-sectional area.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "R ∝ A/L",
         "explanation": "This is incorrect. The resistance is directly proportional to length and inversely proportional to cross-sectional area.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "R ∝ √(L×A)",
         "explanation": "This is incorrect. The resistance is directly proportional to length and inversely proportional to cross-sectional area.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -868,22 +868,22 @@ const physicsALevelQuestions = [
       {
         "text": "F = kq₁q₂/r",
         "explanation": "This is incorrect. The force is inversely proportional to the square of the distance.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = kq₁q₂/r²",
         "explanation": "Correct! Coulomb's law states that F = kq₁q₂/r², where k is the electrostatic constant.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "F = kq₁q₂r",
         "explanation": "This is incorrect. The force is inversely proportional to the square of the distance, not directly proportional.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "F = k(q₁+q₂)/r²",
         "explanation": "This is incorrect. Coulomb's law involves the product of charges, not their sum.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -893,22 +893,22 @@ const physicsALevelQuestions = [
       {
         "text": "v = ω/r",
         "explanation": "This is incorrect. The linear velocity equals the angular velocity multiplied by the radius.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "v = ω×r",
         "explanation": "Correct! The linear velocity equals the angular velocity multiplied by the radius: v = ωr.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "v = ω×r²",
         "explanation": "This is incorrect. The linear velocity equals the angular velocity multiplied by the radius.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "v = ω/r²",
         "explanation": "This is incorrect. The linear velocity equals the angular velocity multiplied by the radius.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -918,22 +918,22 @@ const physicsALevelQuestions = [
       {
         "text": "Heat always flows from a colder body to a hotter body",
         "explanation": "This is incorrect. This is the opposite of the second law of thermodynamics.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The total energy of an isolated system is constant",
         "explanation": "Correct! The first law of thermodynamics is a statement of conservation of energy: ΔU = Q - W.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The entropy of an isolated system always decreases",
         "explanation": "This is incorrect. According to the second law of thermodynamics, the entropy of an isolated system always increases.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "It is impossible to convert heat completely into work",
         "explanation": "This is incorrect. This is a statement of the second law of thermodynamics, not the first law.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -943,22 +943,22 @@ const physicsALevelQuestions = [
       {
         "text": "P = I²R",
         "explanation": "Correct! The power dissipated in a resistor is given by P = I²R, where R is the resistance.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "P = IR",
         "explanation": "This is incorrect. This is the expression for voltage (V = IR), not power.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P = I/R",
         "explanation": "This is incorrect. The power dissipated in a resistor is P = I²R.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P = √(IR)",
         "explanation": "This is incorrect. The power dissipated in a resistor is P = I²R.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -968,22 +968,22 @@ const physicsALevelQuestions = [
       {
         "text": "U = mgh",
         "explanation": "Correct! The gravitational potential energy near Earth's surface is U = mgh, where m is mass, g is gravitational field strength, and h is height.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "U = mg/h",
         "explanation": "This is incorrect. The gravitational potential energy is directly proportional to height, not inversely proportional.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "U = m/gh",
         "explanation": "This is incorrect. The gravitational potential energy is U = mgh.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "U = mh/g",
         "explanation": "This is incorrect. The gravitational potential energy is U = mgh.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -993,22 +993,22 @@ const physicsALevelQuestions = [
       {
         "text": "PV = nRT",
         "explanation": "Correct! This is the ideal gas law, where n is the number of moles and R is the gas constant.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "P/V = nRT",
         "explanation": "This is incorrect. The ideal gas law is PV = nRT.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "PT = nRV",
         "explanation": "This is incorrect. The ideal gas law is PV = nRT.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "P = nRTV",
         "explanation": "This is incorrect. The ideal gas law is PV = nRT.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1018,22 +1018,22 @@ const physicsALevelQuestions = [
       {
         "text": "Constructive interference occurs when the path difference is an odd multiple of half the wavelength",
         "explanation": "This is incorrect. Constructive interference occurs when the path difference is a whole number multiple of the wavelength.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Destructive interference occurs when the path difference is a whole number multiple of the wavelength",
         "explanation": "This is incorrect. Destructive interference occurs when the path difference is an odd multiple of half the wavelength.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Constructive interference occurs when the path difference is a whole number multiple of the wavelength",
         "explanation": "Correct! Constructive interference occurs when the path difference is nλ, where n is an integer.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "Interference can only occur with light waves, not sound waves",
         "explanation": "This is incorrect. Interference can occur with all types of waves, including sound waves.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1043,22 +1043,22 @@ const physicsALevelQuestions = [
       {
         "text": "1/f = 1/u + 1/v",
         "explanation": "Correct! This is the lens equation, which relates the focal length to the object and image distances.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "f = u + v",
         "explanation": "This is incorrect. The lens equation is 1/f = 1/u + 1/v.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "1/f = u + v",
         "explanation": "This is incorrect. The lens equation is 1/f = 1/u + 1/v.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "f = 1/u + 1/v",
         "explanation": "This is incorrect. The lens equation is 1/f = 1/u + 1/v.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1068,22 +1068,22 @@ const physicsALevelQuestions = [
       {
         "text": "Φ = BA cos θ",
         "explanation": "Correct! The magnetic flux equals the magnetic field strength multiplied by the area and the cosine of the angle between the field and the normal to the surface.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "Φ = BA sin θ",
         "explanation": "This is incorrect. The magnetic flux is Φ = BA cos θ, not BA sin θ.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Φ = B/A",
         "explanation": "This is incorrect. The magnetic flux is directly proportional to both the magnetic field and the area.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "Φ = B + A",
         "explanation": "This is incorrect. The magnetic flux involves the product of the magnetic field and the area, not their sum.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1093,22 +1093,22 @@ const physicsALevelQuestions = [
       {
         "text": "A = λN",
         "explanation": "Correct! The activity equals the decay constant multiplied by the number of undecayed nuclei: A = λN.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "A = N/λ",
         "explanation": "This is incorrect. The activity is A = λN, not N/λ.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "A = N²",
         "explanation": "This is incorrect. The activity is directly proportional to N, not N².",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "A = λ/N",
         "explanation": "This is incorrect. The activity is directly proportional to N, not inversely proportional.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1118,22 +1118,22 @@ const physicsALevelQuestions = [
       {
         "text": "All electromagnetic waves travel at the same speed in a vacuum",
         "explanation": "Correct! All electromagnetic waves, regardless of frequency or wavelength, travel at the speed of light (c) in a vacuum.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "The speed of electromagnetic waves in a vacuum depends on their frequency",
         "explanation": "This is incorrect. The speed of electromagnetic waves in a vacuum is constant and independent of frequency.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The speed of electromagnetic waves in a vacuum depends on their amplitude",
         "explanation": "This is incorrect. The speed of electromagnetic waves in a vacuum is constant and independent of amplitude.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "The speed of electromagnetic waves in a vacuum depends on their wavelength",
         "explanation": "This is incorrect. The speed of electromagnetic waves in a vacuum is constant and independent of wavelength.",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   },
@@ -1143,22 +1143,22 @@ const physicsALevelQuestions = [
       {
         "text": "L = I/ω",
         "explanation": "This is incorrect. Angular momentum is directly proportional to angular velocity, not inversely proportional.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "L = I + ω",
         "explanation": "This is incorrect. Angular momentum involves the product of moment of inertia and angular velocity, not their sum.",
-        "isCorrect": False
+        "isCorrect": false
       },
       {
         "text": "L = I × ω",
         "explanation": "Correct! The angular momentum equals the moment of inertia multiplied by the angular velocity: L = Iω.",
-        "isCorrect": True
+        "isCorrect": true
       },
       {
         "text": "L = I × ω²",
         "explanation": "This is incorrect. The angular momentum is L = Iω, not Iω².",
-        "isCorrect": False
+        "isCorrect": false
       }
     ]
   }

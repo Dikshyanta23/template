@@ -38,7 +38,14 @@ export function AuthProvider({ children }) {
       const { data } = await api.post('/api/auth/login', credentials);
       setUser(data.user);
       setAuthMessage(data.message || 'Login successful');
-      navigate('/dashboard');
+      
+      // Navigate based on role
+      if (data.user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
+      
       return data;
     } catch (err) {
       console.error('Login error:', err);
