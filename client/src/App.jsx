@@ -1,92 +1,95 @@
-import { useState, createContext, useMemo } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+// client/src/App.jsx
+import { Routes, Route } from 'react-router-dom';
+import { createContext, useMemo, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
+
+// Pages
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import AdminPanel from './pages/AdminPanel';
 import Register from './pages/Register';
+import TutorRegister from './pages/TutorRegister';
+import Dashboard from './pages/Dashboard';
+import AdminPanel from './pages/admin/AdminPanel';
+import UserManagement from './pages/admin/UserManagement';
+import CourseManagement from './pages/admin/CourseManagement';
+import QuestionManagement from './pages/admin/QuestionManagement';
+import EnquiryManagement from './pages/admin/EnquiryManagement';
+import Courses from './pages/Courses';
+import CourseDetail from './pages/CourseDetail';
+import CourseTest from './pages/CourseTest';
+import NotFound from './pages/NotFound';
 
-// Create color mode context
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function App() {
-  const [mode, setMode] = useState('dark'); // Default to dark mode
+  const [mode, setMode] = useState('light');
   
-  // Color mode context value
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
-    []
+    [],
   );
 
-  // Theme configuration
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode,
-          ...(mode === 'dark'
-            ? {
-                // Dark mode palette
-                background: {
-                  default: '#121212',
-                  paper: '#1E1E1E',
-                },
-                text: {
-                  primary: '#FFFFFF',
-                },
-              }
-            : {
-                // Light mode palette
-                background: {
-                  default: '#FAFAFA',
-                  paper: '#FFFFFF',
-                },
-                text: {
-                  primary: '#212121',
-                },
-              }),
-        },
-        typography: {
-          fontFamily: 'Poppins, sans-serif',
-          h1: {
-            fontSize: '4rem',
-            fontWeight: 700,
-          },
         },
       }),
-    [mode]
+    [mode],
   );
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
-          <AuthProvider>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                </Route>
-                <Route element={<ProtectedRoute adminOnly />}>
-                  <Route path="/admin" element={<AdminPanel />} />
-                </Route>
-              </Routes>
-            </Layout>
-          </AuthProvider>
-        </BrowserRouter>
+        <AuthProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/tutor-application" element={<TutorRegister />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:id" element={<CourseDetail />} />
+              <Route path="/courses/:id/test" element={<CourseTest />} />
+              
+              <Route 
+                path="/dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              <Route 
+                path="/admin" 
+                element={
+                  <ProtectedRoute adminOnly>
+                    <AdminPanel />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="users" element={<UserManagement />} />
+                <Route path="courses" element={<CourseManagement />} />
+                <Route path="courses/:courseId/questions" element={<QuestionManagement />} />
+                <Route path="enquiries" element={<EnquiryManagement />} />
+                <Route index element={<UserManagement />} />
+              </Route>
+              
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </AuthProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -48,7 +48,10 @@ export function AuthProvider({ children }) {
 
   const register = async (credentials) => {
     try {
-      const { data } = await api.post('/api/auth/register', credentials);
+      const { data } = await api.post('/api/auth/register', {
+        ...credentials,
+        role: 'student' // Explicitly set role to student
+      });
       setUser(data.user);
       setAuthMessage(data.message || 'Registration successful');
       navigate('/dashboard');
@@ -56,6 +59,22 @@ export function AuthProvider({ children }) {
     } catch (err) {
       console.error('Register error:', err);
       throw err.response?.data || { message: 'Registration failed' };
+    }
+  };
+
+  const registerTutor = async (credentials) => {
+    try {
+      const { data } = await api.post('/api/auth/register', {
+        ...credentials,
+        role: 'tutor' // Explicitly set role to tutor
+      });
+      setUser(data.user);
+      setAuthMessage(data.message || 'Tutor registration successful');
+      navigate('/dashboard');
+      return data;
+    } catch (err) {
+      console.error('Tutor register error:', err);
+      throw err.response?.data || { message: 'Tutor registration failed' };
     }
   };
 
@@ -76,11 +95,13 @@ export function AuthProvider({ children }) {
       loading, 
       login, 
       logout, 
-      register, 
+      register,
+      registerTutor,
       authMessage,
       setAuthMessage,
       isAuthenticated: !!user,
       isAdmin: user?.role === 'admin',
+      isTutor: user?.role === 'tutor',
       isVerified: user?.verified || user?.role === 'admin'
     }}>
       {children}

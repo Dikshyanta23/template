@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { 
   Button,
@@ -7,26 +8,19 @@ import {
   Grid,
   Paper,
   Link,
-  IconButton,
   Box,
   Alert,
   Snackbar
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useTheme } from '@mui/material/styles';
-import { ColorModeContext } from '../App';
 
-export default function Register() {
+export default function TutorRegister() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
-  const { register, authMessage, setAuthMessage } = useAuth();
-  const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const { registerTutor, authMessage, setAuthMessage } = useAuth();
 
   const isValidEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,7 +47,7 @@ export default function Register() {
     }
 
     try {
-      const response = await register({ email, password });
+      const response = await registerTutor({ email, password });
       setShowSuccess(true);
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');
@@ -66,23 +60,25 @@ export default function Register() {
   };
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', position: 'relative'}}>
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', width: '100%', padding: '2rem 0'}}>
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.palette.background.default,
+        width: '100%'
       }}>
-
         <Paper elevation={3} sx={{
           padding: 4,
           width: '100%',
           maxWidth: 400,
-          backgroundColor: theme.palette.background.paper,
         }}>
-<Typography variant="h4" component="h1" gutterBottom align="center">
-  Register as a Student
-</Typography>
+          <Typography variant="h4" component="h1" gutterBottom align="center">
+            Register as a Tutor
+          </Typography>
+          
+          <Typography variant="body2" paragraph align="center" sx={{ mb: 3 }}>
+            Join our platform as a tutor and share your knowledge with students worldwide.
+          </Typography>
           
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3} justifyContent="center">
@@ -94,10 +90,6 @@ export default function Register() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  sx={{ 
-                    maxWidth: 400,
-                    backgroundColor: theme.palette.background.default 
-                  }}
                 />
               </Grid>
               
@@ -109,10 +101,6 @@ export default function Register() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  sx={{ 
-                    maxWidth: 400,
-                    backgroundColor: theme.palette.background.default 
-                  }}
                 />
               </Grid>
 
@@ -124,10 +112,6 @@ export default function Register() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  sx={{ 
-                    maxWidth: 400,
-                    backgroundColor: theme.palette.background.default 
-                  }}
                 />
               </Grid>
 
@@ -153,19 +137,30 @@ export default function Register() {
                     }
                   }}
                 >
-                  Register
+                  Register as Tutor
                 </Button>
               </Grid>
 
               <Grid item xs={12} container justifyContent="space-between" sx={{ mt: 2 }}>
-              <Link 
-    component={RouterLink} 
-    to="/tutor-application" 
-    color="textSecondary"
-    sx={{ textAlign: 'center', width: '100%' }}
-  >
-    Want to register as a tutor instead?
-  </Link>
+                <Link 
+                  component={RouterLink} 
+                  to="/login" 
+                  color="textSecondary"
+                  sx={{ textAlign: 'center', width: '100%' }}
+                >
+                  Already have an account? Login
+                </Link>
+              </Grid>
+              
+              <Grid item xs={12} container justifyContent="space-between">
+                <Link 
+                  component={RouterLink} 
+                  to="/register" 
+                  color="textSecondary"
+                  sx={{ textAlign: 'center', width: '100%' }}
+                >
+                  Want to register as a student instead?
+                </Link>
               </Grid>
             </Grid>
           </form>
@@ -179,7 +174,7 @@ export default function Register() {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-          {authMessage || 'Registration successful'}
+          {authMessage || 'Tutor registration successful! Your account is pending verification by an admin.'}
         </Alert>
       </Snackbar>
     </div>

@@ -1,3 +1,4 @@
+// server/models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -24,6 +25,14 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  profilePhoto: {
+    type: String,
+    default: null
+  },
+  courses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course'
+  }],
   createdAt: {
     type: Date,
     default: Date.now

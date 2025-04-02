@@ -6,6 +6,10 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const questionRoutes = require('./routes/questionRoutes');
+const enquiryRoutes = require('./routes/enquiryRoutes');
+
 const { authenticate, verifyUser } = require('./middleware/auth');
 
 const app = express();
@@ -23,6 +27,9 @@ app.use(cors({
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/questions', questionRoutes);
+app.use('/api/enquiries', enquiryRoutes);
 
 // Protected route example
 app.get('/api/protected', authenticate, verifyUser, (req, res) => {

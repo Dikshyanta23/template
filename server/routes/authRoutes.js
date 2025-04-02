@@ -7,7 +7,7 @@ const { authenticate } = require('../middleware/auth');
 // Register
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -15,7 +15,15 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
     
-    const user = await User.create({ email, password });
+    // Validate role
+    const validRole = role === 'tutor' ? 'tutor' : 'student';
+    
+    const user = await User.create({ 
+      email, 
+      password,
+      role: validRole // Use the validated role
+    });
+    
     const token = jwt.sign(
       { id: user._id, role: user.role }, 
       process.env.JWT_SECRET,
@@ -29,8 +37,13 @@ router.post('/register', async (req, res) => {
     });
     
     res.status(201).json({ 
-      user: { id: user._id, email: user.email, role: user.role },
-      message: 'Registration successful'
+      user: { 
+        id: user._id, 
+        email: user.email, 
+        role: user.role,
+        verified: user.verified
+      },
+      message: `Registration successful as ${validRole}`
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
