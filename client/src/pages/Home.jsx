@@ -1,5 +1,5 @@
 // client/src/pages/Home.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { 
   Container, 
   Typography, 
@@ -12,16 +12,20 @@ import {
   CardActions,
   Paper,
   Divider,
-  CircularProgress
+  CircularProgress,
+  useTheme
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { ColorModeContext } from '../App';
 
 export default function Home() {
   const { user } = useAuth();
   const [featuredCourses, setFeaturedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
   
   useEffect(() => {
     fetchFeaturedCourses();
@@ -43,45 +47,67 @@ export default function Home() {
   return (
     <Box>
       {/* Hero Section */}
-      <Box 
-        sx={{ 
-          bgcolor: 'primary.main', 
-          color: 'primary.contrastText',
-          py: 8,
-          mb: 6
+{/* Hero Section */}
+<Box 
+  sx={{ 
+    bgcolor: isDarkMode ? '#1a2027' : 'primary.main', 
+    color: isDarkMode ? '#ffffff' : 'primary.contrastText',
+    py: 8,
+    mb: 6
+  }}
+>
+  <Container maxWidth="md">
+    <Typography 
+      variant="h2" 
+      component="h1" 
+      gutterBottom 
+      align="center"
+      sx={{ color: isDarkMode ? '#ffffff' : 'inherit' }}
+    >
+      Expert Tutoring for Academic Success
+    </Typography>
+    <Typography 
+      variant="h5" 
+      paragraph 
+      align="center"
+      sx={{ color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'inherit' }}
+    >
+      Personalized learning experiences for A Levels, IB, and US college preparation
+    </Typography>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, gap: 2 }}>
+      <Button 
+        component={Link} 
+        to="/courses" 
+        variant="contained" 
+        size="large"
+        sx={{
+          bgcolor: isDarkMode ? '#3a86ff' : theme.palette.secondary.main,
+          color: '#ffffff',
+          '&:hover': {
+            bgcolor: isDarkMode ? '#2563eb' : undefined,
+          }
         }}
       >
-        <Container maxWidth="md">
-          <Typography variant="h2" component="h1" gutterBottom align="center">
-            Expert Tutoring for Academic Success
-          </Typography>
-          <Typography variant="h5" paragraph align="center">
-            Personalized learning experiences for A Levels, IB, and US college preparation
-          </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, gap: 2 }}>
-            <Button 
-              component={Link} 
-              to="/courses" 
-              variant="contained" 
-              color="secondary" 
-              size="large"
-            >
-              Explore Courses
-            </Button>
-            {!user && (
-              <Button 
-                component={Link} 
-                to="/register" 
-                variant="outlined" 
-                color="inherit" 
-                size="large"
-              >
-                Register as Student
-              </Button>
-            )}
-          </Box>
-        </Container>
-      </Box>
+        Explore Courses
+      </Button>
+      {!user && (
+        <Button 
+          component={Link} 
+          to="/register" 
+          variant="outlined" 
+          color="inherit" 
+          size="large"
+          sx={{
+            borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : undefined,
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : undefined,
+          }}
+        >
+          Register as Student
+        </Button>
+      )}
+    </Box>
+  </Container>
+</Box>
       
       {/* Featured Courses Section */}
       <Container maxWidth="lg" sx={{ mb: 8 }}>
@@ -103,6 +129,7 @@ export default function Home() {
                     display: 'flex', 
                     flexDirection: 'column',
                     transition: 'transform 0.3s ease',
+                    bgcolor: isDarkMode ? '#242a32' : undefined,
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       boxShadow: 6
@@ -119,7 +146,7 @@ export default function Home() {
                     <Typography gutterBottom variant="h5" component="h2">
                       {course.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    <Typography variant="body2" color={isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'text.secondary'} sx={{ mb: 2 }}>
                       {course.collection}
                     </Typography>
                     <Typography variant="body2" paragraph>
@@ -131,7 +158,9 @@ export default function Home() {
                       component={Link} 
                       to={`/courses/${course._id}`}
                       size="small" 
-                      color="primary"
+                      sx={{
+                        color: isDarkMode ? '#3a86ff' : theme.palette.primary.main
+                      }}
                     >
                       Learn More
                     </Button>
@@ -139,7 +168,9 @@ export default function Home() {
                       component={Link} 
                       to={`/courses/${course._id}/test`}
                       size="small" 
-                      color="primary"
+                      sx={{
+                        color: isDarkMode ? '#3a86ff' : theme.palette.primary.main
+                      }}
                     >
                       Take Mini Test
                     </Button>
@@ -154,8 +185,13 @@ export default function Home() {
           <Button 
             component={Link} 
             to="/courses" 
-            variant="contained" 
-            color="primary"
+            variant="contained"
+            sx={{
+              bgcolor: isDarkMode ? '#3a86ff' : theme.palette.primary.main,
+              '&:hover': {
+                bgcolor: isDarkMode ? '#2563eb' : undefined,
+              }
+            }}
           >
             View All Courses
           </Button>
@@ -163,43 +199,76 @@ export default function Home() {
       </Container>
       
       {/* Join as Tutor Section */}
-      <Box sx={{ bgcolor: 'grey.100', py: 6, mb: 8 }}>
+      <Box sx={{ 
+        bgcolor: isDarkMode ? '#242a32' : 'grey.100', 
+        py: 6, 
+        mb: 8, 
+        textAlign: 'center' 
+      }}>
         <Container maxWidth="md">
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h4" component="h2" gutterBottom>
-                Join Our Team of Expert Tutors
-              </Typography>
-              <Typography variant="body1" paragraph>
-                Are you passionate about teaching and helping students achieve their academic goals? 
-                Join our team of expert tutors and make a difference in students' lives.
-              </Typography>
+          <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ mb: 3 }}>
+            Join Our Team of Expert Tutors
+          </Typography>
+          
+          <Typography 
+            variant="body1" 
+            paragraph 
+            align="center" 
+            sx={{ 
+              mb: 4, 
+              maxWidth: '800px', 
+              mx: 'auto',
+              color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : undefined
+            }}
+          >
+            Are you passionate about teaching and helping students achieve their academic goals? 
+            Join our team of expert tutors and make a difference in students' lives.
+          </Typography>
+          
+          <Grid container spacing={4} alignItems="center" justifyContent="center" direction="column">
+            <Grid item xs={12} md={6} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
               <Button 
                 component={Link} 
                 to="/tutor-application" 
-                variant="contained" 
-                color="primary" 
+                variant="contained"
                 size="large"
+                sx={{ 
+                  px: 4, 
+                  py: 1.5,
+                  bgcolor: isDarkMode ? '#3a86ff' : theme.palette.primary.main,
+                  '&:hover': {
+                    bgcolor: isDarkMode ? '#2563eb' : undefined,
+                  }
+                }}
               >
                 Apply as a Tutor
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Paper elevation={3} sx={{ p: 3 }}>
-                <Typography variant="h6" gutterBottom>
+              <Paper 
+                elevation={3} 
+                sx={{ 
+                  p: 3, 
+                  textAlign: 'left', 
+                  maxWidth: '500px', 
+                  mx: { xs: 'auto', md: 0 },
+                  bgcolor: isDarkMode ? '#1a2027' : undefined,
+                }}
+              >
+                <Typography variant="h6" gutterBottom align="center" color={isDarkMode ? 'rgba(255, 255, 255, 0.9)' : undefined}>
                   Benefits of Being a Tutor:
                 </Typography>
                 <Box component="ul" sx={{ pl: 2 }}>
-                  <Typography component="li" variant="body1" paragraph>
+                  <Typography component="li" variant="body1" paragraph color={isDarkMode ? 'rgba(255, 255, 255, 0.8)' : undefined}>
                     Flexible teaching schedule
                   </Typography>
-                  <Typography component="li" variant="body1" paragraph>
+                  <Typography component="li" variant="body1" paragraph color={isDarkMode ? 'rgba(255, 255, 255, 0.8)' : undefined}>
                     Competitive compensation
                   </Typography>
-                  <Typography component="li" variant="body1" paragraph>
+                  <Typography component="li" variant="body1" paragraph color={isDarkMode ? 'rgba(255, 255, 255, 0.8)' : undefined}>
                     Professional development opportunities
                   </Typography>
-                  <Typography component="li" variant="body1" paragraph>
+                  <Typography component="li" variant="body1" paragraph color={isDarkMode ? 'rgba(255, 255, 255, 0.8)' : undefined}>
                     Make a positive impact on students' futures
                   </Typography>
                 </Box>
@@ -208,59 +277,6 @@ export default function Home() {
           </Grid>
         </Container>
       </Box>
-      
-      {/* Why Choose Us Section */}
-      <Container maxWidth="lg" sx={{ mb: 8 }}>
-        <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ mb: 4 }}>
-          Why Choose Our Tutoring Services
-        </Typography>
-        
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Expert Tutors
-              </Typography>
-              <Typography variant="body2">
-                Our tutors are subject matter experts with proven track records of student success.
-              </Typography>
-            </Box>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Personalized Learning
-              </Typography>
-              <Typography variant="body2">
-                We tailor our teaching approach to match each student's learning style and needs.
-              </Typography>
-            </Box>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Comprehensive Resources
-              </Typography>
-              <Typography variant="body2">
-                Access to practice tests, study materials, and additional resources to enhance learning.
-              </Typography>
-            </Box>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Proven Results
-              </Typography>
-              <Typography variant="body2">
-                Our students consistently achieve top grades and gain admission to prestigious universities.
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
     </Box>
   );
 }

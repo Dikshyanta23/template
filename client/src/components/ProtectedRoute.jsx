@@ -1,8 +1,9 @@
-import { Navigate, Outlet } from 'react-router-dom';
+// ProtectedRoute.jsx
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { CircularProgress, Box, Typography, Paper, Container, Button } from '@mui/material';
+import { CircularProgress, Box, Typography, Paper, Container } from '@mui/material';
 
-export default function ProtectedRoute({ adminOnly }) {
+export default function ProtectedRoute({ children, adminOnly = false, tutorOnly = false }) {
   const { user, loading } = useAuth();
   
   if (loading) {
@@ -22,28 +23,12 @@ export default function ProtectedRoute({ adminOnly }) {
   if (adminOnly && user.role !== 'admin') {
     return <Navigate to="/dashboard" />;
   }
-  
-  // Check if user is verified
-  if (!user.verified && user.role !== 'admin') {
-    return (
-      <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Paper elevation={3} sx={{ p: 4, textAlign: 'center' }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Account Pending Verification
-          </Typography>
-          <Typography variant="body1" paragraph>
-            Your account is currently awaiting verification by an administrator.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            You'll be able to access the full features of the application once your account has been verified.
-          </Typography>
-          <Typography variant="body2" sx={{ mt: 3, color: 'text.secondary' }}>
-            Please check back later or contact support if you have any questions.
-          </Typography>
-        </Paper>
-      </Container>
-    );
+
+  // Check if tutor route and user is not tutor
+  if (tutorOnly && user.role !== 'tutor') {
+    return <Navigate to="/dashboard" />;
   }
   
-  return <Outlet />;
+  // Return the children instead of Outlet
+  return children;
 }

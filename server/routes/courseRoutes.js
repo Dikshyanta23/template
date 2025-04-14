@@ -6,7 +6,23 @@ const { isAuthenticated, isAdmin } = require('../middleware/auth');
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 const cloudinary = require('../utils/cloudinary');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
+// Configure multer for file uploads
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files are allowed'), false);
+  }
+};
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+});
 
 // Get all courses
 router.get('/', async (req, res) => {
@@ -46,9 +62,12 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a course (Admin Only)
-router.post('/courses', isAuthenticated, isAdmin, async (req, res) => {
+router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, res) => {
   try {
     const { title, description, collection, topics, tutors, questions } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image file is required' });
+    }
 
     // Validate required fields
     if (!title || !description || !collection || !topics || !questions) {
@@ -62,11 +81,12 @@ router.post('/courses', isAuthenticated, isAdmin, async (req, res) => {
     }
 
     // Validate questions format
-    if (!Array.isArray(questions) || questions.length !== 20) {
+    const parsedQuestions = JSON.parse(questions); // Parse questions from stringified JSON
+    if (!Array.isArray(parsedQuestions) || parsedQuestions.length !== 20) {
       return res.status(400).json({ message: 'Exactly 20 questions must be provided' });
     }
 
-    for (const question of questions) {
+    for (const question of parsedQuestions) {
       if (
         typeof question.text !== 'string' ||
         !Array.isArray(question.options) ||
@@ -77,6 +97,18 @@ router.post('/courses', isAuthenticated, isAdmin, async (req, res) => {
       }
     }
 
+    // Handle image upload to Cloudinary
+    let imageUrl = '';
+    if (req.file) {
+      const uniqueFilename = `${uuidv4()}-${req.file.originalname}`;
+      const result = await cloudinary.uploader.upload(req.file.buffer.toString('base64'), {
+        public_id: uniqueFilename,
+        folder: 'course_images',
+        resource_type: 'image',
+      });
+      imageUrl = result.secure_url;
+    }
+
     // Create the course
     const newCourse = new Course({
       title,
@@ -84,13 +116,14 @@ router.post('/courses', isAuthenticated, isAdmin, async (req, res) => {
       collection,
       topics: topicList,
       tutors: Array.isArray(tutors) ? tutors : [tutors],
+      image: imageUrl, // Save the Cloudinary URL
     });
 
     await newCourse.save();
 
     // Save questions to the database
     const savedQuestions = [];
-    for (const questionData of questions) {
+    for (const questionData of parsedQuestions) {
       const question = new Question({
         course: newCourse._id,
         text: questionData.text,
@@ -203,31 +236,5 @@ router.get('/:id/test', async (req, res) => {
   }
 });
 
-router.post('/upload-image', isAuthenticated, isAdmin, async (req, res) => {
-  try {
-    const { title, description, collection, topics } = req.body;
-
-    // Upload image to Cloudinary
-    let imageUrl = '';
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      imageUrl = result.secure_url;
-    }
-
-    const newCourse = new Course({
-      title,
-      description,
-      collection,
-      topics: topics.split(',').map((topic) => topic.trim()),
-      image: imageUrl,
-    });
-    await newCourse.save();
-
-    res.status(201).json({ message: 'Course created successfully', course: newCourse });
-  } catch (err) {
-    console.error('Error creating course:', err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
 
 module.exports = router;

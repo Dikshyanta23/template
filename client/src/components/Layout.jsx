@@ -41,7 +41,6 @@ export default function Layout({ children }) {
             
             {user ? (
               <>
-
                 <Button color="inherit" onClick={logout}>
                   Logout
                 </Button>
@@ -51,15 +50,7 @@ export default function Layout({ children }) {
                 <Button color="inherit" component={Link} to="/login">
                   Login
                 </Button>
-                <Button 
-                  color="inherit" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const registerType = window.confirm('Register as a tutor?') ? 
-                      '/tutor-application' : '/register';
-                    navigate(registerType);
-                  }}
-                >
+                <Button color="inherit" component={Link} to="/register">
                   Register
                 </Button>
               </>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
     try {
       const { data } = await api.get('/api/auth/check-auth');
       setUser(data.user);
-      setAuthMessage(data.message || 'Authenticated');
+      setAuthMessage(data.message || 'authenticated');
     } catch (err) {
       console.log('Auth check error:', err);
       setUser(null);
@@ -32,6 +32,8 @@ export function AuthProvider({ children }) {
       setLoading(false);
     }
   };
+
+
 
   const login = async (credentials) => {
     try {
@@ -96,21 +98,23 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const contextValue = useMemo(() => ({
+    user, 
+    loading, 
+    login, 
+    logout, 
+    register,
+    registerTutor,
+    authMessage,
+    setAuthMessage,
+    isAuthenticated: !!user,
+    isAdmin: user?.role === 'admin',
+    isTutor: user?.role === 'tutor',
+    isVerified: user?.verified || user?.role === 'admin'
+  }), [user, loading, authMessage]);
+
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      login, 
-      logout, 
-      register,
-      registerTutor,
-      authMessage,
-      setAuthMessage,
-      isAuthenticated: !!user,
-      isAdmin: user?.role === 'admin',
-      isTutor: user?.role === 'tutor',
-      isVerified: user?.verified || user?.role === 'admin'
-    }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
