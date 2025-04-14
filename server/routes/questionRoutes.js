@@ -2,11 +2,11 @@
 const router = require('express').Router();
 const Question = require('../models/Question');
 const Course = require('../models/Course');
-const { authenticate, authorizeAdmin } = require('../middleware/auth');
+const { isAuthenticated, isAdmin } = require('../middleware/auth');
 const mongoose = require('mongoose');
 
 // Get all questions for a course (admin only)
-router.get('/course/:courseId', authenticate, authorizeAdmin, async (req, res) => {
+router.get('/course/:courseId', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const questions = await Question.find({ course: req.params.courseId });
     res.json({ questions });
@@ -16,7 +16,7 @@ router.get('/course/:courseId', authenticate, authorizeAdmin, async (req, res) =
 });
 
 // Create a question (admin only)
-router.post('/', authenticate, authorizeAdmin, async (req, res) => {
+router.post('/', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const { courseId, text, options } = req.body;
     
@@ -45,7 +45,7 @@ router.post('/', authenticate, authorizeAdmin, async (req, res) => {
 });
 
 // Update a question (admin only)
-router.put('/:id', authenticate, authorizeAdmin, async (req, res) => {
+router.put('/:id', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const { text, options } = req.body;
     
@@ -74,7 +74,7 @@ router.put('/:id', authenticate, authorizeAdmin, async (req, res) => {
 });
 
 // Delete a question (admin only)
-router.delete('/:id', authenticate, authorizeAdmin, async (req, res) => {
+router.delete('/:id', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const question = await Question.findById(req.params.id);
     if (!question) {
@@ -90,7 +90,7 @@ router.delete('/:id', authenticate, authorizeAdmin, async (req, res) => {
 });
 
 // Bulk upload questions (admin only)
-router.post('/bulk', authenticate, authorizeAdmin, async (req, res) => {
+router.post('/bulk', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const { courseId, questions } = req.body;
     

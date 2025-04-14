@@ -3,66 +3,52 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    trim: true,
-    lowercase: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email']
+    required: true,
+    unique: true
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 6 characters']
+    required: true
   },
   role: {
     type: String,
-    enum: ['tutor', 'admin', 'student'],
+    enum: ['student', 'tutor', 'admin'],
     default: 'student'
-  },
-  verified: {
-    type: Boolean,
-    default: false
-  },
-  profilePhoto: {
-    type: String,
-    default: null
   },
   courses: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Course'
   }],
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  phone: {
+    type: String,
+    default: null
+  },
+}, { timestamps: true });
 
 // Hash password before saving
 UserSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-// Set first user as admin and verified
-UserSchema.pre('save', async function(next) {
-  // Only run this for new users
-  if (!this.isNew) return next();
+  if (!this.isModified('password')) {
+    return next();
+  }
   
   try {
-    const count = await mongoose.model('User').countDocuments();
-    if (count === 0) {
-      this.role = 'admin';
-      this.verified = true;
-    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
+
+// Compare password method
+UserSchema.methods.comparePassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 module.exports = mongoose.model('User', UserSchema);

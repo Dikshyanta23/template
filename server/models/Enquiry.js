@@ -2,32 +2,33 @@
 const mongoose = require('mongoose');
 
 const EnquirySchema = new mongoose.Schema({
-  course: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true
-  },
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: true
   },
   email: {
     type: String,
-    required: [true, 'Email is required'],
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email']
+    required: true
   },
   phone: {
+    type: String
+  },
+  subject: {
     type: String,
-    required: [true, 'Phone number is required']
+    required: true
   },
   message: {
     type: String,
-    required: [true, 'Message is required']
+    required: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  status: {
+    type: String,
+    enum: ['pending', 'completed'],
+    default: 'pending'
+  },
+  response: {
+    type: String
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Enquiry', EnquirySchema);

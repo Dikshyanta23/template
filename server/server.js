@@ -3,14 +3,19 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
-
-const { authenticate, verifyUser } = require('./middleware/auth');
+const attendanceRoutes = require('./routes/attendanceRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
+const ratingRoutes = require('./routes/ratingRoutes');
+const tutorRoutes = require('./routes/tutorRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const collectionRoutes = require('./routes/collectionRoutes');
 
 const app = express();
 
@@ -24,17 +29,20 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/enquiries', enquiryRoutes);
-
-// Protected route example
-app.get('/api/protected', authenticate, verifyUser, (req, res) => {
-  res.json({ message: 'This is a protected route', user: req.user });
-});
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/ratings', ratingRoutes);
+app.use('/api/tutor', tutorRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/collections', collectionRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

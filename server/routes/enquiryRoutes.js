@@ -2,10 +2,10 @@
 const router = require('express').Router();
 const Enquiry = require('../models/Enquiry');
 const Course = require('../models/Course');
-const { authenticate, authorizeAdmin } = require('../middleware/auth');
+const { isAuthenticated, isAdmin } = require('../middleware/auth');
 
 // Get all enquiries (admin only)
-router.get('/', authenticate, authorizeAdmin, async (req, res) => {
+router.get('/', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const enquiries = await Enquiry.find().populate('course', 'title').sort('-createdAt');
     res.json({ enquiries });
@@ -42,16 +42,14 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Delete an enquiry (admin only)
-router.delete('/:id', authenticate, authorizeAdmin, async (req, res) => {
+// Delete an enquiry (Admin Only)
+router.delete('/:id', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const enquiry = await Enquiry.findById(req.params.id);
     if (!enquiry) {
       return res.status(404).json({ message: 'Enquiry not found' });
     }
-    
     await enquiry.remove();
-    
     res.json({ message: 'Enquiry deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });

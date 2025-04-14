@@ -4,34 +4,28 @@ const mongoose = require('mongoose');
 const CourseSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'Course title is required'],
-    trim: true
+    required: true
   },
   description: {
     type: String,
-    required: [true, 'Course description is required']
+    required: true
   },
   collection: {
-    type: String,
-    required: [true, 'Course collection is required'],
-    enum: ['A Levels', 'IB', 'US BSc Preparation']
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Collection',
+    required: true
   },
   topics: [{
-    type: String,
-    required: [true, 'At least one topic is required']
+    type: String
   }],
-  image: {
-    type: String,
-    default: null
-  },
   tutors: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-  createdAt: {
-    type: Date,
-    default: Date.now
+  image: {
+    type: String,
+    default: null
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Course', CourseSchema);
