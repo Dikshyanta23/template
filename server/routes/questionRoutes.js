@@ -18,7 +18,7 @@ router.get('/course/:courseId', isAuthenticated, isAdmin, async (req, res) => {
 // Create a question (admin only)
 router.post('/', isAuthenticated, isAdmin, async (req, res) => {
   try {
-    const { courseId, text, options } = req.body;
+    const { courseId, text, options, correctAnswer } = req.body;
 
     // Verify course exists
     const course = await Course.findById(courseId);
@@ -26,20 +26,23 @@ router.post('/', isAuthenticated, isAdmin, async (req, res) => {
       return res.status(404).json({ message: 'Course not found' });
     }
 
-    // Verify at least one correct answer
-    const hasCorrectAnswer = options.some(option => option.isCorrect);
-    if (!hasCorrectAnswer) {
-      return res.status(400).json({ message: 'At least one option must be correct' });
+    // Validate options and correctAnswer
+    if (options.length !== 4) {
+      return res.status(400).json({ message: 'Exactly 4 options are required' });
+    }
+    if (correctAnswer < 0 || correctAnswer > 3) {
+      return res.status(400).json({ message: 'Invalid correct answer index' });
     }
 
+    // Create the question
     const question = await Question.create({
       course: courseId,
       text,
-      options: options.map(option => ({
+      options: options.map((option) => ({
         text: option.text,
-        isCorrect: option.isCorrect,
         explanation: option.explanation || '',
       })),
+      correctAnswer,
     });
 
     res.status(201).json({ question, message: 'Question created successfully' });

@@ -64,25 +64,34 @@ router.get('/:id', async (req, res) => {
 // Create a course (Admin Only)
 router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, res) => {
   try {
+    console.log('1');
+
     const { title, description, collection, topics, tutors, questions } = req.body;
+
+    // Validate image file
     if (!req.file) {
+      console.log('2');
       return res.status(400).json({ message: 'Image file is required' });
     }
 
     // Validate required fields
     if (!title || !description || !collection || !topics || !questions) {
+      console.log('3');
       return res.status(400).json({ message: 'All fields are required' });
     }
+ 
 
     // Validate topics format
     const topicList = topics.split(',').map((topic) => topic.trim());
     if (topicList.length === 0) {
+      console.log('4');
       return res.status(400).json({ message: 'Topics must be a comma-separated list' });
     }
 
     // Validate questions format
     const parsedQuestions = JSON.parse(questions); // Parse questions from stringified JSON
     if (!Array.isArray(parsedQuestions) || parsedQuestions.length !== 20) {
+      console.log('5');
       return res.status(400).json({ message: 'Exactly 20 questions must be provided' });
     }
 
@@ -91,8 +100,11 @@ router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, r
         typeof question.text !== 'string' ||
         !Array.isArray(question.options) ||
         question.options.length !== 4 ||
-        !question.options.some((option) => option.isCorrect)
+        typeof question.correctAnswer !== 'number' ||
+        question.correctAnswer < 0 ||
+        question.correctAnswer > 3
       ) {
+        console.log('6');
         return res.status(400).json({ message: 'Invalid question format' });
       }
     }
@@ -108,6 +120,8 @@ router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, r
       });
       imageUrl = result.secure_url;
     }
+  
+    
 
     // Create the course
     const newCourse = new Course({
@@ -129,9 +143,9 @@ router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, r
         text: questionData.text,
         options: questionData.options.map((option) => ({
           text: option.text,
-          isCorrect: option.isCorrect,
           explanation: option.explanation || '',
         })),
+        correctAnswer: questionData.correctAnswer,
       });
       await question.save();
       savedQuestions.push(question);
@@ -148,6 +162,7 @@ router.post('/', isAuthenticated, isAdmin, upload.single('image'), async (req, r
       questions: savedQuestions,
     });
   } catch (err) {
+    console.log('7');
     console.error('Error creating course:', err);
     res.status(500).json({ message: 'Server error' });
   }

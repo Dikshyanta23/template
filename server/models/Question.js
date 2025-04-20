@@ -20,11 +20,11 @@ const QuestionSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    isCorrect: {
-      type: Boolean,
-      required: true
-    }
   }],
+  correctAnswer: {
+    type: Number,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

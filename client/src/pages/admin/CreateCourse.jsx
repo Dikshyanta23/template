@@ -21,30 +21,35 @@ import {
 import axios from 'axios';
 
 export default function CreateCourse() {
+  // Default values for 20 questions
+  const defaultQuestions = Array(20).fill({
+    text: 'Default Question Text',
+    options: [
+      { text: 'Option 1', explanation: 'Explanation for Option 1' },
+      { text: 'Option 2', explanation: 'Explanation for Option 2' },
+      { text: 'Option 3', explanation: 'Explanation for Option 3' },
+      { text: 'Option 4', explanation: 'Explanation for Option 4' },
+    ],
+    correctAnswer: 0, // Default correct answer index
+  });
+
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: 'Default Course Title',
+    description: 'Default Course Description',
     collection: '',
-    topics: '',
+    topics: 'Topic1, Topic2, Topic3',
     image: null,
-    questions: Array(20).fill({
-      text: 'Default Question Text',
-      options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-      correctAnswer: 0,
-    }),
-    // questions: Array(20).fill({ text: '', options: ['', '', '', ''], correctAnswer: 0 }),
+    questions: defaultQuestions,
   });
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [errors, setErrors] = useState({}); // For real-time validation
+  const [errors, setErrors] = useState({});
   const [newCollectionDialogOpen, setNewCollectionDialogOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
   const [newCollectionDescription, setNewCollectionDescription] = useState('');
-  const [imagePreview, setImagePreview] = useState(null); // For image preview
-  const [collectionsLoading, setCollectionsLoading] = useState(true); // Loading indicator for collections
 
-  // Fetch existing collections
+  // Fetch collections on component mount
   useEffect(() => {
     const fetchCollections = async () => {
       try {
@@ -52,9 +57,6 @@ export default function CreateCourse() {
         setCollections(response.data.collections);
       } catch (err) {
         console.error('Error fetching collections:', err);
-        setError('Failed to load collections');
-      } finally {
-        setCollectionsLoading(false); // Stop loading indicator
       }
     };
     fetchCollections();
@@ -73,8 +75,8 @@ export default function CreateCourse() {
       if (field === 'text') {
         updatedQuestions[index].text = value;
       } else if (field.startsWith('option')) {
-        const optionIndex = parseInt(field.split('-')[1], 10);
-        updatedQuestions[index].options[optionIndex] = value;
+        const [_, optionIndex, key] = field.split('-');
+        updatedQuestions[index].options[optionIndex][key] = value;
       } else if (field === 'correctAnswer') {
         updatedQuestions[index].correctAnswer = parseInt(value, 10);
       }
@@ -82,36 +84,32 @@ export default function CreateCourse() {
     });
   };
 
-  // Handle file upload
-  const handleFileChange = (e) => {
-  
-    
-    const file = e.target.files[0];
-    console.log('Selected file: ', file);
-    if (file) {
-      setFormData((prev) => ({ ...prev, image: file }));
-      setImagePreview(URL.createObjectURL(file)); // Set image preview
-    } else {
-      console.error('No file selected');
-    }
-  };
-
-  // Real-time validation for questions
+  // Validate questions before submission
   const validateQuestions = () => {
     const newErrors = {};
     formData.questions.forEach((question, index) => {
       if (!question.text.trim()) {
         newErrors[`question-${index}-text`] = 'Question text is required';
       }
-      if (question.options.some(option => !option.trim())) {
-        newErrors[`question-${index}-options`] = 'All options must be filled';
-      }
-      if (!question.options.some(option => option.trim())) {
-        newErrors[`question-${index}-correctAnswer`] = 'At least one correct answer is required';
+      question.options.forEach((option, optionIndex) => {
+        if (!option.text.trim()) {
+          newErrors[`question-${index}-option-${optionIndex}-text`] = 'Option text is required';
+        }
+        if (!option.explanation.trim()) {
+          newErrors[`question-${index}-option-${optionIndex}-explanation`] =
+            'Explanation is required';
+        }
+      });
+      if (
+        typeof question.correctAnswer !== 'number' ||
+        question.correctAnswer < 0 ||
+        question.correctAnswer > 3
+      ) {
+        newErrors[`question-${index}-correctAnswer`] = 'Correct answer must be a valid index (0-3)';
       }
     });
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   // Handle form submission
@@ -130,16 +128,23 @@ export default function CreateCourse() {
       if (formData.image) {
         formDataToSend.append('image', formData.image);
       }
-      formDataToSend.append('questions', JSON.stringify(formData.questions));
-  
-      for (const [key, value] of formDataToSend.entries()) {
-        console.log(`${key}:`, value);
-      }
-  
+
+      // Append transformed questions
+      const transformedQuestions = formData.questions.map((question) => ({
+        text: question.text,
+        options: question.options.map((option) => ({
+          text: option.text,
+          explanation: option.explanation,
+        })),
+        correctAnswer: question.correctAnswer,
+      }));
+      formDataToSend.append('questions', JSON.stringify(transformedQuestions));
+
+      // Send the data to the backend
       const response = await axios.post('/api/courses', formDataToSend, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-  
+
       console.log('Course created successfully:', response.data);
       alert('Course created successfully!');
       setLoading(false);
@@ -153,7 +158,7 @@ export default function CreateCourse() {
   // Handle adding a new collection
   const handleAddNewCollection = async () => {
     try {
-      const response = await axios.post('/api/collections', {
+      const response = await axios.post('/api/admin/collections', {
         name: newCollectionName,
         description: newCollectionDescription,
       });
@@ -183,8 +188,6 @@ export default function CreateCourse() {
             fullWidth
             margin="normal"
             required
-            error={!!errors.title}
-            helperText={errors.title}
           />
 
           {/* Description */}
@@ -198,8 +201,6 @@ export default function CreateCourse() {
             rows={4}
             margin="normal"
             required
-            error={!!errors.description}
-            helperText={errors.description}
           />
 
           {/* Collection */}
@@ -209,24 +210,29 @@ export default function CreateCourse() {
               labelId="collection-label"
               name="collection"
               value={formData.collection}
-              onChange={handleInputChange}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, collection: e.target.value }))
+              }
               label="Collection"
               required
             >
-              {collectionsLoading ? (
-                <MenuItem disabled>Loading collections...</MenuItem>
-              ) : (
-                collections.map((collection) => (
-                  <MenuItem key={collection._id} value={collection._id}>
-                    {collection.name}
-                  </MenuItem>
-                ))
-              )}
-              <MenuItem onClick={() => setNewCollectionDialogOpen(true)}>
-                + Add New Collection
-              </MenuItem>
+              {collections.map((collection) => (
+                <MenuItem key={collection._id} value={collection._id}>
+                  {collection.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
+
+          {/* Add New Collection Button */}
+          <Button
+            onClick={() => setNewCollectionDialogOpen(true)}
+            variant="outlined"
+            color="primary"
+            sx={{ mb: 2 }}
+          >
+            Add New Collection
+          </Button>
 
           {/* Topics */}
           <TextField
@@ -236,22 +242,18 @@ export default function CreateCourse() {
             onChange={handleInputChange}
             fullWidth
             margin="normal"
-            placeholder="e.g., Algebra, Calculus, Geometry"
             required
-            error={!!errors.topics}
-            helperText={errors.topics}
           />
 
           {/* Image Upload */}
-          <Button variant="contained" component="label" fullWidth sx={{ mt: 2 }}>
-            Upload Image
-            <input type="file" hidden onChange={handleFileChange} />
-          </Button>
-          {imagePreview && (
-  <Box sx={{ mt: 2 }}>
-    <img src={imagePreview} alt="Preview" style={{ width: '100px', height: 'auto' }} />
-  </Box>
-)}
+          <TextField
+            type="file"
+            name="image"
+            onChange={(e) => setFormData((prev) => ({ ...prev, image: e.target.files[0] }))}
+            fullWidth
+            margin="normal"
+            required
+          />
 
           {/* Questions Section */}
           <Box sx={{ mt: 3 }}>
@@ -260,33 +262,47 @@ export default function CreateCourse() {
             </Typography>
             {formData.questions.map((question, index) => (
               <Box key={index} sx={{ mb: 2 }}>
-                <Typography variant="subtitle1">
-                  Question {index + 1}
-                </Typography>
+                <Typography variant="subtitle1">Question {index + 1}</Typography>
                 <TextField
                   label="Question Text"
                   value={question.text}
-                  onChange={(e) => handleQuestionChange(index, 'text', e.target.value)}
+                  onChange={(e) =>
+                    handleQuestionChange(index, 'text', e.target.value)
+                  }
                   fullWidth
                   margin="normal"
                   required
-                  error={!!errors[`question-${index}-text`]}
-                  helperText={errors[`question-${index}-text`]}
                 />
                 <Grid container spacing={2}>
                   {[0, 1, 2, 3].map((optionIndex) => (
                     <Grid item xs={6} key={optionIndex}>
                       <TextField
                         label={`Option ${optionIndex + 1}`}
-                        value={question.options[optionIndex]}
+                        value={question.options[optionIndex].text}
                         onChange={(e) =>
-                          handleQuestionChange(index, `option-${optionIndex}`, e.target.value)
+                          handleQuestionChange(
+                            index,
+                            `option-${optionIndex}-text`,
+                            e.target.value
+                          )
                         }
                         fullWidth
                         margin="normal"
                         required
-                        error={!!errors[`question-${index}-options`]}
-                        helperText={errors[`question-${index}-options`]}
+                      />
+                      <TextField
+                        label={`Explanation for Option ${optionIndex + 1}`}
+                        value={question.options[optionIndex].explanation}
+                        onChange={(e) =>
+                          handleQuestionChange(
+                            index,
+                            `option-${optionIndex}-explanation`,
+                            e.target.value
+                          )
+                        }
+                        fullWidth
+                        margin="normal"
+                        required
                       />
                     </Grid>
                   ))}
@@ -294,14 +310,12 @@ export default function CreateCourse() {
                 <FormControl fullWidth margin="normal">
                   <InputLabel>Correct Answer</InputLabel>
                   <Select
-                    value={question.correctAnswer}
+                    value={question.correctAnswer || ''}
                     onChange={(e) =>
                       handleQuestionChange(index, 'correctAnswer', e.target.value)
                     }
                     label="Correct Answer"
                     required
-                    error={!!errors[`question-${index}-correctAnswer`]}
-                    helperText={errors[`question-${index}-correctAnswer`]}
                   >
                     {[0, 1, 2, 3].map((optionIndex) => (
                       <MenuItem key={optionIndex} value={optionIndex}>
@@ -327,14 +341,14 @@ export default function CreateCourse() {
             {loading ? 'Creating Course...' : 'Create Course'}
           </Button>
         </form>
-      </Paper>
 
-      {/* Error Message */}
-      {error && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          {error}
-        </Alert>
-      )}
+        {/* Error Message */}
+        {error && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {error}
+          </Alert>
+        )}
+      </Paper>
 
       {/* Add New Collection Dialog */}
       <Dialog open={newCollectionDialogOpen} onClose={() => setNewCollectionDialogOpen(false)}>
@@ -353,8 +367,6 @@ export default function CreateCourse() {
             value={newCollectionDescription}
             onChange={(e) => setNewCollectionDescription(e.target.value)}
             fullWidth
-            multiline
-            rows={3}
             margin="dense"
             required
           />

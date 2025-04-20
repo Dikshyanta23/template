@@ -16,7 +16,6 @@ import Dashboard from './pages/Dashboard';
 import AdminLayout from './pages/admin/AdminLayout';
 import UserManagement from './pages/admin/UserManagement';
 import Courses from './pages/Courses';
-import QuestionManagement from './pages/admin/QuestionManagement';
 import EnquiryManagement from './pages/admin/Enquiries';
 import SessionManagement from './pages/admin/Sessions';
 import PaymentManagement from './pages/admin/Payments';
@@ -116,7 +115,6 @@ function App() {
                 <Route path="courses" element={<CourseManagement />} />
                 <Route path="courses/create" element={<CreateCourse />} />
                 <Route path="collections" element={<CollectionManagement />} />
-                <Route path="courses/:courseId/questions" element={<QuestionManagement />} />
                 <Route path="sessions" element={<SessionManagement />} />
                 <Route path="payments" element={<PaymentManagement />} />
                 <Route path="enquiries" element={<EnquiryManagement />} />
